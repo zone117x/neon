@@ -81,6 +81,9 @@ pub(crate) mod boxed;
 pub(crate) mod date;
 pub(crate) mod error;
 
+#[cfg(feature = "napi-6")]
+pub(crate) mod bigint;
+
 pub(crate) mod internal;
 pub(crate) mod utf8;
 
@@ -107,6 +110,8 @@ pub use self::boxed::{Finalize, JsBox};
 #[cfg(feature = "napi-5")]
 pub use self::date::{DateError, DateErrorKind, JsDate};
 pub use self::error::JsError;
+#[cfg(feature = "napi-6")]
+pub use self::bigint::{JsBigInt};
 
 pub(crate) fn build<'a, T: Managed, F: FnOnce(&mut raw::Local) -> bool>(
     env: Env,

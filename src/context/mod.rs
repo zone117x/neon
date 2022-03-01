@@ -165,6 +165,8 @@ use crate::types::binary::{JsArrayBuffer, JsBuffer};
 use crate::types::boxed::{Finalize, JsBox};
 #[cfg(feature = "napi-5")]
 use crate::types::date::{DateError, JsDate};
+#[cfg(feature = "napi-6")]
+use crate::types::bigint::{JsBigInt};
 use crate::types::error::JsError;
 use crate::types::{
     JsArray, JsBoolean, JsFunction, JsNull, JsNumber, JsObject, JsString, JsUndefined, JsValue,
@@ -480,6 +482,12 @@ pub trait Context<'a>: ContextInternal<'a> {
     #[cfg_attr(docsrs, doc(cfg(feature = "napi-5")))]
     fn date(&mut self, value: impl Into<f64>) -> Result<Handle<'a, JsDate>, DateError> {
         JsDate::new(self, value)
+    }
+
+    #[cfg(feature = "napi-6")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "napi-6")))]
+    fn bigint(&mut self, value: impl Into<i64>) -> Handle<'a, JsBigInt> {
+        JsBigInt::new(self, value)
     }
 
     /// Produces a handle to the JavaScript global object.

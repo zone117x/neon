@@ -10,6 +10,8 @@ pub mod external;
 pub mod fun;
 #[cfg(feature = "napi-6")]
 pub mod lifecycle;
+#[cfg(feature = "napi-6")]
+pub mod bigint;
 pub mod mem;
 pub mod object;
 pub mod primitive;
